@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kalshi RV Edge</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">RV</div>
+          <div>
+            <h1>Kalshi Edge</h1>
+            <p>Heston JD + regimen</p>
+          </div>
+        </div>
+        <nav class="tabs" aria-label="Secciones">
+          <button class="tab-button active" data-tab="quotes">Cotizaciones</button>
+          <button class="tab-button" data-tab="calibration">Calibracion</button>
+          <button class="tab-button" data-tab="distribution">Distribucion</button>
+          <button class="tab-button" data-tab="edge">Edge</button>
+        </nav>
+        <div class="refresh-box">
+          <div class="muted">Actualizacion</div>
+          <strong id="countdown">60s</strong>
+          <button id="refreshNow" class="secondary">Actualizar</button>
+          <div id="healthSummary" class="health-summary">Health pendiente</div>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <div class="eyebrow">Dashboard local</div>
+            <h2 id="pageTitle">Cotizaciones Kalshi</h2>
+          </div>
+          <div class="status-line">
+            <span id="statusDot" class="dot"></span>
+            <span id="statusText">Cargando</span>
+          </div>
+        </header>
+
+        <section id="quotes" class="tab-panel active">
+          <div class="toolbar">
+            <div>
+              <h3>Watchlist</h3>
+              <p class="muted">Bid/ask, spread, liquidez y probabilidad del modelo.</p>
+            </div>
+            <select id="marketSelect" aria-label="Mercado seleccionado"></select>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ticker</th>
+                  <th>Spot</th>
+                  <th>Strike</th>
+                  <th>Spot source</th>
+                  <th>Bid</th>
+                  <th>Ask</th>
+                  <th>Spread</th>
+                  <th>P modelo</th>
+                  <th>Senal</th>
+                </tr>
+              </thead>
+              <tbody id="quotesBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="calibration" class="tab-panel">
+          <div class="toolbar">
+            <div>
+              <h3>Parametros del modelo</h3>
+              <p class="muted">Costes, simulacion y tres regimenes Heston jump-diffusion.</p>
+            </div>
+            <div class="button-row">
+              <button id="recalibrateModel" class="secondary">Recalibrar Short DTE</button>
+              <button id="saveCalibration">Guardar</button>
+            </div>
+          </div>
+          <div id="calibrationMeta" class="meta-strip"></div>
+          <div class="calibration-grid">
+            <div class="panel">
+              <h4>Costes y senal</h4>
+              <div id="signalInputs" class="form-grid"></div>
+            </div>
+            <div class="panel">
+              <h4>Monte Carlo</h4>
+              <div id="simulationInputs" class="form-grid"></div>
+            </div>
+            <div class="panel">
+              <h4>Scanner KXBTCD</h4>
+              <div id="scannerInputs" class="form-grid"></div>
+            </div>
+          </div>
+          <div id="regimeInputs" class="regime-grid"></div>
+        </section>
+
+        <section id="distribution" class="tab-panel">
+          <div class="toolbar">
+            <div>
+              <h3>Distribucion terminal</h3>
+              <p class="muted">Histograma de precios simulados hasta resolucion.</p>
+            </div>
+            <button id="refreshDistribution" class="secondary">Recalcular</button>
+          </div>
+          <div class="chart-layout">
+            <div class="chart-card">
+              <canvas id="distributionChart" width="900" height="420"></canvas>
+            </div>
+            <div class="panel">
+              <h4>Percentiles</h4>
+              <div id="percentiles" class="metric-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="edge" class="tab-panel">
+          <div class="toolbar">
+            <div>
+              <h3>Alertas y ranking de edge</h3>
+              <p class="muted">Incluye bid/ask spread, fees, slippage y buffer del modelo.</p>
+            </div>
+          </div>
+          <div id="alertCards" class="edge-grid alert-grid"></div>
+          <div id="edgeCards" class="edge-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

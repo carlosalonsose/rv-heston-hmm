@@ -1,0 +1,10 @@
+{
+  "markets": [
+    {
+      "ticker": "KXBTCD-26MAY1016-T88499.99",
+      "spot_source": "cf_brti_with_coinbase_fallback",
+      "auto_from_kalshi": true,
+      "initial_variance": 0.25
+    }
+  ]
+}

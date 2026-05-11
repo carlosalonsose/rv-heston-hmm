@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rv-heston-hmm"
+version = "0.1.0"
+description = "Relative value binary pricing with Heston jump-diffusion and short-DTE regimes"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.24",
+  "certifi>=2024.2.2",
+  "yfinance>=0.2.40",
+  "statsmodels>=0.14",
+  "scipy>=1.10",
+  "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+packages = ["rv_heston_hmm"]
+
+[project.scripts]
+rv = "rv_heston_hmm.cli:main"
+rv-monitor = "rv_heston_hmm.monitor:main"
+rv-dashboard = "rv_heston_hmm.dashboard:main"
+rv-calibrate = "rv_heston_hmm.calibration:main"

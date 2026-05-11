@@ -1,0 +1,98 @@
+{
+  "signal": {
+    "taker_fee_rate": 0.035,
+    "slippage": 0.002,
+    "model_buffer": 0.025,
+    "min_edge": 0.01,
+    "min_liquidity": 1.0
+  },
+  "simulation": {
+    "paths": 100000,
+    "steps_per_day": 288,
+    "annualization_days": 365
+  },
+  "scanner": {
+    "enabled": true,
+    "series": "KXBTCD",
+    "max_markets": 80,
+    "spot_source": "cf_brti_with_coinbase_fallback",
+    "initial_variance": 0.2774597555466458,
+    "min_liquidity_contracts": 1,
+    "min_edge_alert": 0.02,
+    "max_spread": 0.25
+  },
+  "regime": {
+    "initial_prob": [
+      0.7547900507995038,
+      0.2452099492004963
+    ],
+    "transition": [
+      [
+        0.9732171561338526,
+        0.026782843866147377
+      ],
+      [
+        0.0951052304167277,
+        0.9048947695832723
+      ]
+    ],
+    "params": [
+      {
+        "name": "short_dte_low_vol",
+        "mu": 0.5,
+        "kappa": 50.0,
+        "theta": 0.043266337918229925,
+        "vol_of_vol": 1.0,
+        "rho": 0.07571445810191932,
+        "jump_intensity": 50.0,
+        "jump_mean": 0.0010937983429293093,
+        "jump_std": 0.007160304549627805,
+        "calibration_status": "FALLBACK",
+        "guardrail_reason": "kappa>500; vol_of_vol>5; Feller violated; another regime failed guardrails"
+      },
+      {
+        "name": "short_dte_high_vol",
+        "mu": 0.5,
+        "kappa": 50.0,
+        "theta": 0.3332163063682202,
+        "vol_of_vol": 1.0,
+        "rho": 0.07571445810191932,
+        "jump_intensity": 50.0,
+        "jump_mean": 0.0010937983429293093,
+        "jump_std": 0.007160304549627805,
+        "calibration_status": "FALLBACK",
+        "guardrail_reason": "|mu|>3; kappa>500; vol_of_vol>5; Feller violated"
+      }
+    ]
+  },
+  "metadata": {
+    "historical_calibration": {
+      "ticker": "BTC-USD",
+      "mode": "short_dte",
+      "period": "7d/45d",
+      "interval": "5m/1h",
+      "observations": 1845,
+      "timestamp_utc": "2026-05-10T23:47:21.601020+00:00",
+      "mu_hist": 1.4890415446175371,
+      "sigma_hist": 0.3646070873680263,
+      "jump_intensity": 50.0,
+      "jump_mean": 0.0010937983429293093,
+      "jump_std": 0.007160304549627805,
+      "initial_variance": 0.2774597555466458,
+      "initial_vol": 0.5267444879129214,
+      "realized_vol_1h": 0.3143253538171904,
+      "realized_vol_4h": 0.6056558156818956,
+      "realized_vol_24h": 0.29427035564706805,
+      "kappa_estimate": 50.0,
+      "vol_of_vol_estimate": 1.0,
+      "rho_estimate": 0.07571445810191932,
+      "warnings": [
+        "jump_intensity is high (284.88/year) with 6-sigma threshold",
+        "regime drift is extreme: mu_low=0.086, mu_high=12.166",
+        "guardrail fallback used: Feller violated; kappa>500; vol_of_vol>5; |mu|>3",
+        "jump_intensity capped from 284.88/year to 50.00/year"
+      ]
+    }
+  },
+  "calibration_mode": "short_dte"
+}
